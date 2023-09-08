@@ -1,7 +1,21 @@
+using AccountManagement.Infra.Configuration;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+var services = builder.Services;
+//==================================================================
+services.AddControllersWithViews();
+
+//------------------------------------------------------------------
+
+var connectionString = builder.Configuration.GetConnectionString("TopLearnConnection");
+
+AccountManagementIoc.Configure(services, connectionString);
+
+services.AddSingleton(HtmlEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Arabic));
 
 var app = builder.Build();
 
@@ -9,7 +23,6 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
