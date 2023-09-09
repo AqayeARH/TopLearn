@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "PfK/MLTQ8jIbIZJ7H1miCqrkNZjxHWiIqI4fUHvXyWc07Zt4///yhRZemhkUPPsBvs5bBVLC57jjeAvhRj3o+w==",
+  "dgSpecHash": "lYVlQPA8VZkHfKI5z5+J9sfhWGcS6d2hDna+u54Yaj5K5hOdObD7E18CSW8llYdlHRTV05kHMPC+kUCQTdycIw==",
   "success": true,
   "projectFilePath": "D:\\Project\\Core\\new_TopLearn\\TopLearn\\AccountManagement.Infra.Configuration\\AccountManagement.Infra.Configuration.csproj",
   "expectedPackageFiles": [
@@ -22,7 +22,7 @@
     "C:\\Users\\ILIYA 2022\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\ILIYA 2022\\.nuget\\packages\\microsoft.extensions.logging\\7.0.0\\microsoft.extensions.logging.7.0.0.nupkg.sha512",
     "C:\\Users\\ILIYA 2022\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\7.0.0\\microsoft.extensions.logging.abstractions.7.0.0.nupkg.sha512",
-    "C:\\Users\\ILIYA 2022\\.nuget\\packages\\microsoft.extensions.options\\7.0.0\\microsoft.extensions.options.7.0.0.nupkg.sha512",
+    "C:\\Users\\ILIYA 2022\\.nuget\\packages\\microsoft.extensions.options\\7.0.1\\microsoft.extensions.options.7.0.1.nupkg.sha512",
     "C:\\Users\\ILIYA 2022\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512",
     "C:\\Users\\ILIYA 2022\\.nuget\\packages\\microsoft.identity.client\\4.45.0\\microsoft.identity.client.4.45.0.nupkg.sha512",
     "C:\\Users\\ILIYA 2022\\.nuget\\packages\\microsoft.identity.client.extensions.msal\\2.19.3\\microsoft.identity.client.extensions.msal.2.19.3.nupkg.sha512",

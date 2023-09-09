@@ -342,7 +342,7 @@
           "buildTransitive/net6.0/Microsoft.Extensions.Logging.Abstractions.targets": {}
         }
       },
-      "Microsoft.Extensions.Options/7.0.0": {
+      "Microsoft.Extensions.Options/7.0.1": {
         "type": "package",
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "7.0.0",
@@ -1046,6 +1046,7 @@
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
           "AccountManagement.Application.Contracts": "1.0.0",
+          "AccountManagement.Common": "1.0.0",
           "AccountManagement.Domain": "1.0.0"
         },
         "compile": {
@@ -1058,11 +1059,27 @@
       "AccountManagement.Application.Contracts/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "0.Framework": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/AccountManagement.Application.Contracts.dll": {}
         },
         "runtime": {
           "bin/placeholder/AccountManagement.Application.Contracts.dll": {}
+        }
+      },
+      "AccountManagement.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "Microsoft.Extensions.Options": "7.0.1"
+        },
+        "compile": {
+          "bin/placeholder/AccountManagement.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AccountManagement.Common.dll": {}
         }
       },
       "AccountManagement.Domain/1.0.0": {
@@ -1613,10 +1630,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Extensions.Options/7.0.0": {
-      "sha512": "lP1yBnTTU42cKpMozuafbvNtQ7QcBjr/CcK3bYOGEMH55Fjt+iecXjT6chR7vbgCMqy3PG3aNQSZgo/EuY/9qQ==",
+    "Microsoft.Extensions.Options/7.0.1": {
+      "sha512": "pZRDYdN1FpepOIfHU62QoBQ6zdAoTvnjxFfqAzEd9Jhb2dfhA5i6jeTdgGgcgTWFRC7oT0+3XrbQu4LjvgX1Nw==",
       "type": "package",
-      "path": "microsoft.extensions.options/7.0.0",
+      "path": "microsoft.extensions.options/7.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1637,7 +1654,7 @@
         "lib/netstandard2.0/Microsoft.Extensions.Options.xml",
         "lib/netstandard2.1/Microsoft.Extensions.Options.dll",
         "lib/netstandard2.1/Microsoft.Extensions.Options.xml",
-        "microsoft.extensions.options.7.0.0.nupkg.sha512",
+        "microsoft.extensions.options.7.0.1.nupkg.sha512",
         "microsoft.extensions.options.nuspec",
         "useSharedDesignerContext.txt"
       ]
@@ -3251,6 +3268,11 @@
       "type": "project",
       "path": "../AccountManagement.Application.Contracts/AccountManagement.Application.Contracts.csproj",
       "msbuildProject": "../AccountManagement.Application.Contracts/AccountManagement.Application.Contracts.csproj"
+    },
+    "AccountManagement.Common/1.0.0": {
+      "type": "project",
+      "path": "../AccountManagement.Common/AccountManagement.Common.csproj",
+      "msbuildProject": "../AccountManagement.Common/AccountManagement.Common.csproj"
     },
     "AccountManagement.Domain/1.0.0": {
       "type": "project",

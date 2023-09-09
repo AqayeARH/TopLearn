@@ -41,7 +41,7 @@
                             <div class="signin ">
                                 <i class="zmdi zmdi-account"></i>
                                 <a href=""> ورود </a> /
-                                <a href=""> عضویت </a>
+                                <a asp-controller="Account" asp-action="Register"> عضویت </a>
                             </div>
                         </div>
                     </div>
@@ -169,6 +169,7 @@
 
     <script src="~/site/js/bootstrap.min.js"></script>
     <script src="~/site/js/script.js"></script>
+    @await RenderSectionAsync("Scripts",false)
     <script src="~/js/global.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>

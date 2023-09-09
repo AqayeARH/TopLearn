@@ -1,6 +1,7 @@
 ﻿using AccountManagement.Application;
 using AccountManagement.Application.Contracts.Account;
 using AccountManagement.Application.Contracts.Role;
+using AccountManagement.Common.PasswordHasher;
 using AccountManagement.Domain.AccountAgg;
 using AccountManagement.Domain.RoleAgg;
 using AccountManagement.Infra.EfCore;
@@ -27,6 +28,8 @@ public static class AccountManagementIoc
         services.AddTransient<IRoleApplication, RoleApplication>();
 
         #endregion
+
+        services.AddSingleton<IPasswordHasher, PasswordHasher>();
 
         #region db context
 
