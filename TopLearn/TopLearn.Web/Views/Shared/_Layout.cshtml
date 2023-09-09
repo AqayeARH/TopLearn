@@ -1,49 +1,175 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html class="no-js" dir="rtl" lang="fa-IR">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - TopLearn.Web</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/TopLearn.Web.styles.css" asp-append-version="true" />
+    <meta charset="UTF-8">
+    @if (ViewData["Title"] == null)
+    {
+        <title> تاپ لرن </title>
+    }
+    <title> تاپ لرن - @ViewData["Title"] </title>
+    <meta name="googlebot" content="index,follow">
+    <meta name="robots" content="noodp,noydir">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="~/site/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/site/css/bootstrap-rtl.min.css">
+    <link rel="stylesheet" type="text/css" href="~/site/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="~/site/css/style.css">
+    <script src="~/site/js/jquery.min.js"></script>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TopLearn.Web</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+    <script src="~/site/js/modernizr-custom.js"></script>
+
+    <div class="landing-layer">
+        <div class="container">
+            <nav>
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                        <ul>
+                            <li><a href="/"> تاپ لرن </a></li>
+                            <li><a href="/"> همکاری در فروش </a></li>
+                            <li><a href="/"> درباره ما </a> </li>
+                            <li><a href="/"> تماس با ما </a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="clientarea">
+                            <div class="loggein hidden">
+                                <i class="zmdi zmdi-account"></i><a href=""> ایمان مدائنی ، خوش آمدی </a>
+                            </div>
+                            <div class="signin ">
+                                <i class="zmdi zmdi-account"></i>
+                                <a href=""> ورود </a> /
+                                <a href=""> عضویت </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+            </nav>
+            @await RenderSectionAsync("SearchBox",false)
+
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <!-- main manu -->
+    <div class="main-menu">
         <div class="container">
-            &copy; 2023 - TopLearn.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <nav>
+                <span class="responsive-sign"><i class="zmdi zmdi-menu"></i></span>
+                <ul>
+                    <li>
+                        <a href=""> برنامه نویسی موبایل </a>
+                        <ul>
+                            <li><a href=""> زامارین  Xamarin </a></li>
+                            <li><a href=""> react Native </a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href=""> برنامه نویسی وب </a>
+                        <ul>
+                            <li><a href=""> Asp.net WebForms </a></li>
+                            <li><a href=""> Asp.net MVC </a></li>
+                            <li><a href=""> PHP MVC </a></li>
+                            <li><a href=""> PHP FrameWorks </a></li>
+                            <li><a href=""> Asp.net Core </a></li>
+                        </ul>
+                    </li>
+                    <li><a href=""> برنامه نویسی تحت ویندوز </a></li>
+                    <li>
+                        <a href=""> طراحی سایت </a>
+                        <ul>
+                            <li><a href=""> طراحی سایت </a></li>
+                            <li><a href=""> Bootstrap </a></li>
+                            <li><a href=""> Angular </a></li>
+                            <li><a href=""> react </a></li>
+                            <li><a href=""> Jquery </a></li>
+                        </ul>
+                    </li>
+                    <li><a href=""> بانک های اطلاعاتی </a></li>
+                    <li><a href=""> سئو </a></li>
+                    <li><a href=""> سیستم عامل </a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!-- /main manu -->
+    <!-- content -->
+    @RenderBody()
+    <!-- /content -->
+    <!-- footer -->
+    <footer>
+        <div class="top-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <section class="list">
+                            <header><h4> دسترسی سریع</h4></header>
+                            <ul>
+                                <li><a href="">مشاهده تمامی دوره ها</a></li>
+                                <li><a href="">قوانین خرید از سایت </a></li>
+                                <li><a href="">راهنمای خرید از سایت </a></li>
+                                <li><a href="">همکاری با تاپ لرن </a></li>
+                                <li><a href="">کسب درآمد از تاپ لرن </a></li>
+                                <li><a href="">ماهنامه طراحی وب</a></li>
+                            </ul>
+                        </section>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <section class="list">
+                            <header><h4> دسترسی سریع</h4></header>
+                            <ul>
+                                <li><a href="">مشاهده تمامی دوره ها</a></li>
+                                <li><a href="">قوانین خرید از سایت </a></li>
+                                <li><a href="">راهنمای خرید از سایت </a></li>
+                                <li><a href="">همکاری با تاپ لرن </a></li>
+                                <li><a href="">کسب درآمد از تاپ لرن </a></li>
+                                <li><a href="">ماهنامه طراحی وب</a></li>
+                            </ul>
+                        </section>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <section class="list">
+                            <header><h4> دسترسی سریع</h4></header>
+                            <ul>
+                                <li><a href="">مشاهده تمامی دوره ها</a></li>
+                                <li><a href="">قوانین خرید از سایت </a></li>
+                                <li><a href="">راهنمای خرید از سایت </a></li>
+                                <li><a href="">همکاری با تاپ لرن </a></li>
+                                <li><a href="">کسب درآمد از تاپ لرن </a></li>
+                                <li><a href="">ماهنامه طراحی وب</a></li>
+                            </ul>
+                        </section>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <section class="list">
+                            <header><h4> دسترسی سریع</h4></header>
+                            <ul>
+                                <li><a href="">مشاهده تمامی دوره ها</a></li>
+                                <li><a href="">قوانین خرید از سایت </a></li>
+                                <li><a href="">راهنمای خرید از سایت </a></li>
+                                <li><a href="">همکاری با تاپ لرن </a></li>
+                                <li><a href="">کسب درآمد از تاپ لرن </a></li>
+                                <li><a href="">ماهنامه طراحی وب</a></li>
+                            </ul>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-footer">
+            <div class="container">
+                <p>
+                    تمامی حقوق مادی و معنوی این قالب متعلق به <a href=""> تاپ لرن </a> می باشد و هرگونه کپی برداری و انتشار غیر مجاز پیگرد قانونی دارد .
+                </p>
+            </div>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    <!-- /footer -->
+
+    <script src="~/site/js/bootstrap.min.js"></script>
+    <script src="~/site/js/script.js"></script>
+    <script src="~/js/global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
