@@ -15,6 +15,7 @@ namespace TopLearn.Web.Controllers
 
             return redirectPath;
         }
+
         protected void SuccessAlert()
         {
             var model = JsonConvert.SerializeObject(OperationResult.Success());
@@ -25,6 +26,7 @@ namespace TopLearn.Web.Controllers
             var model = JsonConvert.SerializeObject(OperationResult.Success(message));
             HttpContext.Response.Cookies.Append("SystemAlert", model);
         }
+
         protected void ErrorAlert()
         {
             var model = JsonConvert.SerializeObject(OperationResult.Error());

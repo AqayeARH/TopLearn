@@ -1,0 +1,57 @@
+﻿@model AccountManagement.Application.Contracts.Account.LoginAccountCommand
+@{
+    ViewData["Title"] = "ورود";
+}
+
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">تاپ لرن</a></li>
+            <li class="breadcrumb-item active" aria-current="page">ورود به تاپ لرن</li>
+        </ul>
+    </nav>
+</div>
+
+<main class="client-page">
+    <div class="container-content">
+
+        <header><h2> ورود به تاپ لرن </h2></header>
+
+        <div class="form-layer">
+
+            <form asp-controller="Account" asp-action="Login" method="post">
+
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
+                    <input asp-for="Email" class="form-control" placeholder="ایمیل">
+                </div>
+                <span asp-validation-for="Email" class="text-danger"></span>
+
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="zmdi zmdi-lock"></i></span>
+                    <input asp-for="Password" class="form-control" placeholder="رمز عبور">
+                </div>
+                <span asp-validation-for="Password" class="text-danger"></span>
+
+                <div class="remember-me">
+                    <label><input type="checkbox" asp-for="RememberMe"> مرا بخاطر بسپار </label>
+                </div>
+
+                <div class="link">
+                    <a href=""> <i class="zmdi zmdi-lock"></i> رمز عبور خود را فراموش کرده ام !</a>
+                    <a asp-controller="Account" asp-action="Login"> <i class="zmdi zmdi-account"></i> عضویت در سایت </a>
+                </div>
+
+                <button class="btn btn-success"> ورود به سایت </button>
+
+            </form>
+        </div>
+
+    </div>
+</main>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial"/>
+}

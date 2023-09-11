@@ -1,6 +1,7 @@
 ﻿using AccountManagement.Application;
 using AccountManagement.Application.Contracts.Account;
 using AccountManagement.Application.Contracts.Role;
+using AccountManagement.Common.Authentication;
 using AccountManagement.Common.PasswordHasher;
 using AccountManagement.Domain.AccountAgg;
 using AccountManagement.Domain.RoleAgg;
@@ -29,6 +30,7 @@ public static class AccountManagementIoc
 
         #endregion
 
+        services.AddTransient<IAuthenticationHelper, AuthenticationHelper>();
         services.AddSingleton<IPasswordHasher, PasswordHasher>();
 
         #region db context

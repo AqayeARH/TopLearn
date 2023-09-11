@@ -1,5 +1,6 @@
 ﻿using _0.Framework.Infrastructure;
 using AccountManagement.Domain.AccountAgg;
+using Microsoft.EntityFrameworkCore;
 
 namespace AccountManagement.Infra.EfCore.Repositories;
 
@@ -15,4 +16,14 @@ public class AccountRepository : EfCoreGenericRepository<long, Account>, IAccoun
     }
 
     #endregion
+
+    public async Task<Account> GetByEmail(string email)
+    {
+        return await _context.Accounts.SingleOrDefaultAsync(x => x.Email.Equals(email));
+    }
+
+    public async Task<Account> GetByActiveCode(string activeCode)
+    {
+        return await _context.Accounts.SingleOrDefaultAsync(x => x.ActiveCode.Equals(activeCode));
+    }
 }

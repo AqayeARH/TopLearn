@@ -21,7 +21,7 @@ public class Account : BaseEntity<long>
         Username = username;
         Password = password;
         ActiveCode = Guid.NewGuid().ToString().Replace("-", "");
-        ImageName = string.IsNullOrEmpty(imageName) ? "no-profile" : imageName;
+        ImageName = string.IsNullOrEmpty(imageName) ? "no-profile.jpg" : imageName;
         IsActive = isActive;
         AccountRoles = new List<AccountRole>();
     }

@@ -6,6 +6,7 @@ public class OperationResult
     public OperationResultStatus Status { get; set; }
 
     #region Errors
+
     public static OperationResult Error()
     {
         return new OperationResult()
@@ -22,6 +23,7 @@ public class OperationResult
             Message = message,
         };
     }
+
     #endregion
 
     #region NotFound
@@ -63,11 +65,12 @@ public class OperationResult
             Message = message,
         };
     }
+
     #endregion
 }
 public enum OperationResultStatus
 {
     Error = 10,
     Success = 200,
-    NotFound = 404
+    NotFound = 404,
 }
