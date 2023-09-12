@@ -7,4 +7,5 @@ public interface IAuthenticationHelper
     bool IsAuthenticated();
     long CurrentAccountId();
     AuthenticationViewModel CurrentAccountInfo();
+    string CurrentAccountFullname();
 }

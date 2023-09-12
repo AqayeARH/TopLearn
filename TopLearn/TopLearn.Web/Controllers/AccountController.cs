@@ -1,4 +1,5 @@
 ﻿using _0.Framework.Application;
+using _0.Framework.Application.Email;
 using AccountManagement.Application.Contracts.Account;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,9 +10,11 @@ namespace TopLearn.Web.Controllers
         #region constructor injection
 
         private readonly IAccountApplication _accountApplication;
-        public AccountController(IAccountApplication accountApplication)
+        private readonly IViewRenderService _viewRenderService;
+        public AccountController(IAccountApplication accountApplication, IViewRenderService viewRenderService)
         {
             _accountApplication = accountApplication;
+            _viewRenderService = viewRenderService;
         }
 
         #endregion
@@ -36,9 +39,16 @@ namespace TopLearn.Web.Controllers
 
             if (result.Item1.Status == OperationResultStatus.Success)
             {
-                //TODO Send activate email
+
+                #region Send Active Email
+
+                var emailBody = _viewRenderService.RenderToStringAsync("_ActivateAccountEmail", result.Item2);
+                SendEmail.Send(result.Item2.Email, "فعالسازی حساب", emailBody);
+
+                #endregion
+
                 SuccessAlert(result.Item1.Message);
-                return View("SuccessRegister",result.Item2);
+                return View("SuccessRegister", result.Item2);
             }
 
             ErrorAlert(result.Item1.Message);
@@ -91,7 +101,7 @@ namespace TopLearn.Web.Controllers
                     break;
                 case OperationResultStatus.Success:
                     SuccessAlert(result.Message);
-                    break;
+                    return RedirectToAction("Login", "Account");
                 case OperationResultStatus.NotFound:
                     ErrorAlert(result.Message);
                     break;
@@ -99,6 +109,18 @@ namespace TopLearn.Web.Controllers
                     return NotFound();
             }
 
+            return Redirect("/");
+        }
+
+        #endregion
+
+        #region Logout
+
+        [Route("Logout")]
+        public async Task<IActionResult> Logout()
+        {
+            var result = await _accountApplication.LogoutAccount();
+            SuccessAlert(result.Message);
             return Redirect("/");
         }
 

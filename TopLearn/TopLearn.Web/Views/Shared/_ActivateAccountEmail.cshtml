@@ -1,0 +1,13 @@
+﻿@model AccountManagement.Application.Contracts.Account.AccountViewModel
+@{
+    Layout = null;
+}
+
+<div style="direction: rtl; padding: 10px;">
+    <h2>@Model.FullName گرامی</h2>
+    <p>
+        با تشکر از ثبت نام شما در سایت تاپ لرن.<br />
+        برای تکمیل ثبت نام و فعالسازی حساب روی لینک زیر کلیک نمایید
+    </p>
+    <a href="https://localhost:7135/ActiveAccount?activeCode=@Model.ActiveCode">فعالسازی حساب</a>
+</div>

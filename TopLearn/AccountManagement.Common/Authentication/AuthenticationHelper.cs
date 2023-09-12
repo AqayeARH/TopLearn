@@ -31,14 +31,12 @@ namespace AccountManagement.Common.Authentication
 
             var authProperties = new AuthenticationProperties
             {
-                ExpiresUtc = DateTimeOffset.UtcNow.AddDays(10),
                 IsPersistent = account.RememberMe
             };
 
             _contextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(claimsIdentity),
                 authProperties);
-
         }
 
         public void SignOut()
@@ -71,6 +69,11 @@ namespace AccountManagement.Common.Authentication
             result.Username = claims.First(x => x.Type == "Username").Value;
             result.Fullname = claims.First(x => x.Type == ClaimTypes.Name).Value;
             return result;
+        }
+
+        public string CurrentAccountFullname()
+        {
+            return !IsAuthenticated() ? "" : _contextAccessor.HttpContext.User.Claims.First(x => x.Type == ClaimTypes.Name).Value;
         }
     }
 }

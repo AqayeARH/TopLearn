@@ -1,4 +1,4 @@
-﻿@model string
+﻿@model AccountManagement.Application.Contracts.Account.AccountViewModel
 @{
     ViewData["Title"] = "پایان ثبت نام";
 }
@@ -15,6 +15,7 @@
 
 <div class="container">
     <div class="alert alert-success">
-        برای تکمیل فرآیند ثبت نام وارد ایمیل "@Model" شوید و برای فعالسازی حساب روی لینک فعالسازی کلیک نمایید.
+        <p class="help-block">@Model.FullName گرامی</p>
+        برای تکمیل فرآیند ثبت نام وارد ایمیل "@Model.Email" شوید و برای فعالسازی حساب روی لینک فعالسازی کلیک نمایید.
     </div>
 </div>

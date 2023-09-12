@@ -23,18 +23,18 @@ public class AccountApplication : IAccountApplication
 
     #endregion
 
-    public async Task<Tuple<OperationResult, string>> RegisterAccount(AccountRegisterCommand command)
+    public async Task<Tuple<OperationResult, AccountViewModel>> RegisterAccount(AccountRegisterCommand command)
     {
         var email = command.Email.FixEmail();
 
         if (await _accountRepository.IsExist(x => x.Email.Equals(email)))
         {
-            return Tuple.Create(OperationResult.Error("ایمیل وارد شده قبلا در سایت ثبت شده است"), "");
+            return Tuple.Create(OperationResult.Error("ایمیل وارد شده قبلا در سایت ثبت شده است"), new AccountViewModel());
         }
 
         if (!command.Password.Equals(command.RePassword))
         {
-            return Tuple.Create(OperationResult.Error("کلمه عبور با تکرار آن همخوانی ندارد"), "");
+            return Tuple.Create(OperationResult.Error("کلمه عبور با تکرار آن همخوانی ندارد"), new AccountViewModel());
         }
 
         var password = _passwordHasher.Hash(command.Password);
@@ -43,7 +43,12 @@ public class AccountApplication : IAccountApplication
         await _accountRepository.Create(account);
         await _accountRepository.Save();
 
-        return Tuple.Create(OperationResult.Success("ثبت نام شما با موفقیت انجام شد"), email);
+        return Tuple.Create(OperationResult.Success("ثبت نام شما با موفقیت انجام شد"), new AccountViewModel()
+        {
+            Email = account.Email,
+            ActiveCode = account.ActiveCode,
+            FullName = account.FullName
+        });
     }
 
     public async Task<OperationResult> LoginAccount(LoginAccountCommand command)
@@ -99,5 +104,12 @@ public class AccountApplication : IAccountApplication
         await _accountRepository.Save();
 
         return OperationResult.Success("حساب با موفقیت فعال شد");
+    }
+
+    public Task<OperationResult> LogoutAccount()
+    {
+        _authenticationHelper.SignOut();
+        
+        return Task.FromResult(OperationResult.Success("از سایت خارح شدید"));
     }
 }
