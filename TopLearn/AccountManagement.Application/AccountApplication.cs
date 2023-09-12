@@ -109,7 +109,58 @@ public class AccountApplication : IAccountApplication
     public Task<OperationResult> LogoutAccount()
     {
         _authenticationHelper.SignOut();
-        
+
         return Task.FromResult(OperationResult.Success("از سایت خارح شدید"));
+    }
+
+    public async Task<Tuple<OperationResult, AccountViewModel>> ForgotPassword(ForgotPasswordCommand command)
+    {
+        var email = command.Email.FixEmail();
+        var account = await _accountRepository.GetByEmail(email);
+
+        if (account == null)
+        {
+            return Tuple.Create(OperationResult.NotFound("کاربری با مشخصات وارد شده یافت نشد"),
+                new AccountViewModel());
+        }
+
+        return Tuple.Create(OperationResult.Success("ایمیل بازیابی کلمه عبور برای شما ارسال شد"), new AccountViewModel()
+        {
+            Email = account.Email,
+            ActiveCode = account.ActiveCode,
+            FullName = account.FullName
+        });
+    }
+
+    public async Task<OperationResult> ResetPassword(ResetPasswordCommand command)
+    {
+        var account = await _accountRepository.GetByActiveCode(command.ActiveCode);
+
+        if (account == null)
+        {
+            return OperationResult.NotFound("کاربری با مشخصات ارسالی یافت نشد");
+        }
+
+        if (!account.IsActive)
+        {
+            return OperationResult.Error("حساب شما فعال نمیباشد");
+        }
+
+        if (!command.Password.Equals(command.RePassword))
+        {
+            return OperationResult.Error("کلمه عبور با تکرار آن همخوانی ندارد");
+        }
+
+        var password = _passwordHasher.Hash(command.Password);
+
+        account.ResetPassword(password);
+        await _accountRepository.Save();
+
+        return OperationResult.Success("رمز عبور شما با موفقیت تغییر کرد");
+    }
+
+    public async Task<bool> CheckAccountByActiveCode(string activeCode)
+    {
+        return await _accountRepository.IsExist(x => x.ActiveCode.Equals(activeCode));
     }
 }

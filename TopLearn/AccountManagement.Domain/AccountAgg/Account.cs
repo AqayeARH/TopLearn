@@ -37,4 +37,10 @@ public class Account : BaseEntity<long>
     {
         IsActive = false;
     }
+
+    public void ResetPassword(string password)
+    {
+        Password = password;
+        ActiveCode = Guid.NewGuid().ToString().Replace("-", "");
+    }
 }

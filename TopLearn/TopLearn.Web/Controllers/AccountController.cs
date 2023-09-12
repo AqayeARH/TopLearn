@@ -125,5 +125,90 @@ namespace TopLearn.Web.Controllers
         }
 
         #endregion
+
+        #region Forgot Password
+
+        [Route("ForgotPassword")]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost("ForgotPassword")]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(command);
+            }
+
+            var result = await _accountApplication.ForgotPassword(command);
+            switch (result.Item1.Status)
+            {
+                case OperationResultStatus.Error:
+                    ErrorAlert(result.Item1.Message);
+                    break;
+                case OperationResultStatus.Success:
+                    var emailBody = _viewRenderService.RenderToStringAsync("_ResetPasswordEmail", result.Item2);
+                    SendEmail.Send(result.Item2.Email, "بازیابی رمز عبور", emailBody);
+                    SuccessAlert(result.Item1.Message);
+                    return RedirectToAction("Index", "Home");
+                case OperationResultStatus.NotFound:
+                    ErrorAlert(result.Item1.Message);
+                    break;
+                default:
+                    return NotFound();
+            }
+
+            return View(command);
+        }
+
+        #endregion
+
+        #region Reset Password
+
+        [Route("ResetPassword/{code}")]
+        public async Task<IActionResult> ResetPassword(string code)
+        {
+            if (string.IsNullOrEmpty(code) || !await _accountApplication.CheckAccountByActiveCode(code))
+            {
+                return NotFound();
+            }
+
+            return View(new ResetPasswordCommand()
+            {
+                ActiveCode = code
+            });
+        }
+
+        [HttpPost("ResetPassword/{code}")]
+        public async Task<IActionResult> ResetPassword(ResetPasswordCommand command, string code)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(command);
+            }
+
+            var result = await _accountApplication.ResetPassword(command);
+
+            switch (result.Status)
+            {
+                case OperationResultStatus.Error:
+                    ErrorAlert(result.Message);
+                    break;
+                case OperationResultStatus.Success:
+                    SuccessAlert(result.Message);
+                    return RedirectToAction("Index", "Home");
+                case OperationResultStatus.NotFound:
+                    ErrorAlert(result.Message);
+                    break;
+                default:
+                    return NotFound();
+            }
+
+            return View(command);
+        }
+
+        #endregion
     }
 }
