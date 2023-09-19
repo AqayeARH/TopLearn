@@ -78,7 +78,7 @@ namespace TopLearn.Web.Controllers
             if (result.Status == OperationResultStatus.Success)
             {
                 SuccessAlert(result.Message);
-                return Redirect("/");
+                return Redirect("/UserPanel");
             }
 
             ErrorAlert(result.Message);

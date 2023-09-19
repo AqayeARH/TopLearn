@@ -42,7 +42,7 @@
                             {
                                 <div class="loggein">
                                     <i class="zmdi zmdi-account"></i>
-                                    <a href=""> @AuthenticationHelper.CurrentAccountFullname() ، خوش آمدی </a>/
+                                    <a asp-area="UserPanel" asp-controller="Home" asp-action="Index"> @AuthenticationHelper.CurrentAccountFullname() ، خوش آمدی </a>/
                                     <a asp-controller="Account" asp-action="Logout"> خروج </a>
                                 </div>
                             }

@@ -8,4 +8,5 @@ public interface IAuthenticationHelper
     long CurrentAccountId();
     AuthenticationViewModel CurrentAccountInfo();
     string CurrentAccountFullname();
+    string CurrentAccountEmail();
 }

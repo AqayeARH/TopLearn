@@ -4702,6 +4702,19 @@
         "runtime": {
           "bin/placeholder/AccountManagement.Infra.EfCore.dll": {}
         }
+      },
+      "TopLearn.Query/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "AccountManagement.Infra.EfCore": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/TopLearn.Query.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TopLearn.Query.dll": {}
+        }
       }
     }
   },
@@ -12766,13 +12779,19 @@
       "type": "project",
       "path": "../AccountManagement.Infra.EfCore/AccountManagement.Infra.EfCore.csproj",
       "msbuildProject": "../AccountManagement.Infra.EfCore/AccountManagement.Infra.EfCore.csproj"
+    },
+    "TopLearn.Query/1.0.0": {
+      "type": "project",
+      "path": "../TopLearn.Query/TopLearn.Query.csproj",
+      "msbuildProject": "../TopLearn.Query/TopLearn.Query.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net7.0": [
       "AccountManagement.Infra.Configuration >= 1.0.0",
       "Microsoft.EntityFrameworkCore.Design >= 7.0.10",
-      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 7.0.9"
+      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 7.0.9",
+      "TopLearn.Query >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -12810,6 +12829,9 @@
           "projectReferences": {
             "D:\\Project\\Core\\new_TopLearn\\TopLearn\\AccountManagement.Infra.Configuration\\AccountManagement.Infra.Configuration.csproj": {
               "projectPath": "D:\\Project\\Core\\new_TopLearn\\TopLearn\\AccountManagement.Infra.Configuration\\AccountManagement.Infra.Configuration.csproj"
+            },
+            "D:\\Project\\Core\\new_TopLearn\\TopLearn\\TopLearn.Query\\TopLearn.Query.csproj": {
+              "projectPath": "D:\\Project\\Core\\new_TopLearn\\TopLearn\\TopLearn.Query\\TopLearn.Query.csproj"
             }
           }
         }

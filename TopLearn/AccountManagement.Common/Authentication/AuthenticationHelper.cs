@@ -75,5 +75,10 @@ namespace AccountManagement.Common.Authentication
         {
             return !IsAuthenticated() ? "" : _contextAccessor.HttpContext.User.Claims.First(x => x.Type == ClaimTypes.Name).Value;
         }
+
+        public string CurrentAccountEmail()
+        {
+            return !IsAuthenticated() ? "" : _contextAccessor.HttpContext.User.Claims.First(x => x.Type == ClaimTypes.Email).Value;
+        }
     }
 }

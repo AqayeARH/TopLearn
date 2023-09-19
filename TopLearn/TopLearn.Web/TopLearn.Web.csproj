@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AccountManagement.Infra.Configuration\AccountManagement.Infra.Configuration.csproj" />
+    <ProjectReference Include="..\TopLearn.Query\TopLearn.Query.csproj" />
   </ItemGroup>
 
 </Project>
