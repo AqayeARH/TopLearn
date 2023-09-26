@@ -1,10 +1,12 @@
 using AccountManagement.Infra.Configuration;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
+using _0.Framework.Application;
 using _0.Framework.Application.Email;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using TopLearn.Query.Contracts.UserPanel;
 using TopLearn.Query.Queries;
+using TopLearn.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +29,7 @@ var connectionString = builder.Configuration.GetConnectionString("TopLearnConnec
 AccountManagementIoc.Configure(services, connectionString);
 
 services.AddTransient<IViewRenderService, RenderViewToString>();
+services.AddTransient<IFileUploader, FileUploader>();
 services.AddSingleton(HtmlEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Arabic));
 
 #region queries

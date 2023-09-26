@@ -1,4 +1,5 @@
-﻿@{
+﻿@model TopLearn.Query.Contracts.UserPanel.AccountQueryModel
+@{
     ViewData["Title"] = "پنل کاربری";
 }
 
@@ -18,8 +19,25 @@
                 @* Sidebar *@
                 @await Component.InvokeAsync("UserPanelSidebar")
 
-                @* Account Info *@
-                @await Component.InvokeAsync("AccountInfo")
+                <div class="col-md-9 col-sm-8 col-xs-12">
+                    <section class="user-account-content">
+                        <header>
+                            <h1> داشبورد </h1>
+                        </header>
+                        <div class="inner">
+                            <div class="account-information">
+                                <h3> اطلاعات کاربری </h3>
+                                <ul>
+                                    <li> <i class="zmdi zmdi-account"></i> نام و نام خانوادگی : @Model.FullName </li>
+                                    <li> <i class="zmdi zmdi-assignment-account"></i> نام کاربری :  @Model.Username </li>
+                                    <li> <i class="zmdi zmdi-email"></i> ایمیل : @Model.Email </li>
+                                    <li> <i class="zmdi zmdi-calendar-check"></i> تاریخ عضویت : @Model.RegisterDate </li>
+                                    <li> <i class="zmdi zmdi-money-box"></i> موجودی کیف پول: @Model.Wallet </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>
             </div>
         </div>
     </div>

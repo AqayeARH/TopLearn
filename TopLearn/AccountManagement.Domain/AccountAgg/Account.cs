@@ -43,4 +43,15 @@ public class Account : BaseEntity<long>
         Password = password;
         ActiveCode = Guid.NewGuid().ToString().Replace("-", "");
     }
+
+    public void EditProfile(string fullName, string email, string username, string imageName)
+    {
+        FullName = fullName;
+        Email = email;
+        Username = username;
+        if (!string.IsNullOrEmpty(imageName))
+        {
+            ImageName = imageName;
+        }
+    }
 }

@@ -4663,7 +4663,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
-          "0.Framework": "1.0.0"
+          "0.Framework": "1.0.0",
+          "AccountManagement.Application.Contracts": "1.0.0"
         },
         "compile": {
           "bin/placeholder/AccountManagement.Domain.dll": {}
@@ -12876,7 +12877,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

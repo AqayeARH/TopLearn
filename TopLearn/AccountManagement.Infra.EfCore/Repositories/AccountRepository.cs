@@ -1,4 +1,5 @@
 ﻿using _0.Framework.Infrastructure;
+using AccountManagement.Application.Contracts.Account;
 using AccountManagement.Domain.AccountAgg;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,5 +26,17 @@ public class AccountRepository : EfCoreGenericRepository<long, Account>, IAccoun
     public async Task<Account> GetByActiveCode(string activeCode)
     {
         return await _context.Accounts.SingleOrDefaultAsync(x => x.ActiveCode.Equals(activeCode));
+    }
+
+    public async Task<EditProfileCommand> GetAccountForEditProfile(long id)
+    {
+        return await _context.Accounts.Select(x => new EditProfileCommand()
+        {
+            Email = x.Email,
+            FullName = x.FullName,
+            Id = x.Id,
+            Username = x.Username,
+            ImageName = x.ImageName
+        }).SingleOrDefaultAsync(x => x.Id == id);
     }
 }

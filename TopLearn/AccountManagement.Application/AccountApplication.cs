@@ -14,11 +14,13 @@ public class AccountApplication : IAccountApplication
     private readonly IAccountRepository _accountRepository;
     private readonly IPasswordHasher _passwordHasher;
     private readonly IAuthenticationHelper _authenticationHelper;
-    public AccountApplication(IAccountRepository accountRepository, IPasswordHasher passwordHasher, IAuthenticationHelper authenticationHelper)
+    private readonly IFileUploader _fileUploader;
+    public AccountApplication(IAccountRepository accountRepository, IPasswordHasher passwordHasher, IAuthenticationHelper authenticationHelper, IFileUploader fileUploader)
     {
         _accountRepository = accountRepository;
         _passwordHasher = passwordHasher;
         _authenticationHelper = authenticationHelper;
+        _fileUploader = fileUploader;
     }
 
     #endregion
@@ -162,5 +164,44 @@ public class AccountApplication : IAccountApplication
     public async Task<bool> CheckAccountByActiveCode(string activeCode)
     {
         return await _accountRepository.IsExist(x => x.ActiveCode.Equals(activeCode));
+    }
+
+    public async Task<OperationResult> EditProfile(EditProfileCommand command)
+    {
+        var account = await _accountRepository.Get(command.Id);
+
+        var email = command.Email;
+
+        if (account == null)
+        {
+            return OperationResult.NotFound("کاربری با مشخصات ارسالی یافت نشد");
+        }
+
+        if (await _accountRepository.IsExist(x =>
+                x.Email == email && x.Id != command.Id))
+        {
+            return OperationResult.Error("ایمیل وارد شده قبلا در سایت ثبت شده است");
+        }
+
+        var imageName = _fileUploader.Upload(command.Image, "UserImages");
+
+        account.EditProfile(command.FullName, command.Email, command.Username, imageName);
+
+        await _accountRepository.Save();
+
+        if (command.Image != null)
+        {
+            if (!command.ImageName.Equals("no-profile.jpg"))
+            {
+                _fileUploader.Delete("UserImages", command.ImageName);
+            }
+        }
+
+        return OperationResult.Success("برای اعمال تغییرات دوباره وارد سایت شوید");
+    }
+
+    public async Task<EditProfileCommand> GetAccountForEditProfile(long id)
+    {
+        return await _accountRepository.GetAccountForEditProfile(id);
     }
 }

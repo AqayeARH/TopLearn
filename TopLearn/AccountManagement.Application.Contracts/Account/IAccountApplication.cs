@@ -11,4 +11,6 @@ public interface IAccountApplication
     Task<Tuple<OperationResult,AccountViewModel>> ForgotPassword(ForgotPasswordCommand command);
     Task<OperationResult> ResetPassword(ResetPasswordCommand command);
     Task<bool> CheckAccountByActiveCode(string activeCode);
+    Task<OperationResult> EditProfile(EditProfileCommand command);
+    Task<EditProfileCommand> GetAccountForEditProfile(long id);
 }
