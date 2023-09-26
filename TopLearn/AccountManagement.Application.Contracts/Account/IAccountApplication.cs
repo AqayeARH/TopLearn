@@ -13,4 +13,5 @@ public interface IAccountApplication
     Task<bool> CheckAccountByActiveCode(string activeCode);
     Task<OperationResult> EditProfile(EditProfileCommand command);
     Task<EditProfileCommand> GetAccountForEditProfile(long id);
+    Task<OperationResult> ChangePassword(ChangePasswordCommand command);
 }

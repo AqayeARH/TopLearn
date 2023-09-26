@@ -204,4 +204,33 @@ public class AccountApplication : IAccountApplication
     {
         return await _accountRepository.GetAccountForEditProfile(id);
     }
+
+    public async Task<OperationResult> ChangePassword(ChangePasswordCommand command)
+    {
+        var account = await _accountRepository.Get(command.AccountId);
+
+        if (account == null)
+        {
+            return OperationResult.NotFound("کاربری با مشخصات ارسالی یافت نشد");
+        }
+
+        var (verified, _) = _passwordHasher.Check(account.Password, command.OldPassword);
+
+        if (!verified)
+        {
+            return OperationResult.Error("رمز عبور اشتباه است");
+        }
+
+        if (!command.Password.Equals(command.RePassword))
+        {
+            return OperationResult.Error("کلمه عبور با تکرار آن همخوانی ندارد");
+        }
+
+        var password = _passwordHasher.Hash(command.Password);
+
+        account.ChangePassword(password);
+        await _accountRepository.Save();
+
+        return OperationResult.Success("برای اعمال تغییرات دوباره وارد سایت شوید");
+    }
 }

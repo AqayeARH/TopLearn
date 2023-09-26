@@ -54,4 +54,9 @@ public class Account : BaseEntity<long>
             ImageName = imageName;
         }
     }
+
+    public void ChangePassword(string password)
+    {
+        Password = password;
+    }
 }

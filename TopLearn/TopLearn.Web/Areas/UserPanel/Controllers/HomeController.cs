@@ -73,5 +73,42 @@ namespace TopLearn.Web.Areas.UserPanel.Controllers
 
             return View(command);
         }
+
+        [Route("UserPanel/ChangePassword")]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost("UserPanel/ChangePassword")]
+        public async Task<IActionResult> ChangePassword(ChangePasswordCommand command)
+        {
+            command.AccountId = _authenticationHelper.CurrentAccountId();
+
+            if (!ModelState.IsValid)
+            {
+                return View(command);
+            }
+
+            var result = await _accountApplication.ChangePassword(command);
+
+            switch (result.Status)
+            {
+                case OperationResultStatus.Error:
+                    ErrorAlert(result.Message);
+                    break;
+                case OperationResultStatus.Success:
+                    SuccessAlert(result.Message);
+                    _authenticationHelper.SignOut();
+                    return Redirect("/");
+                case OperationResultStatus.NotFound:
+                    ErrorAlert(result.Message);
+                    break;
+                default:
+                    return NotFound();
+            }
+
+            return View(command);
+        }
     }
 }
