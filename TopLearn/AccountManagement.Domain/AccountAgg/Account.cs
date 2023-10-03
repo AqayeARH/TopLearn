@@ -1,4 +1,5 @@
 ﻿using _0.Framework.Domain;
+using AccountManagement.Domain.WalletAgg;
 
 namespace AccountManagement.Domain.AccountAgg;
 
@@ -12,6 +13,7 @@ public class Account : BaseEntity<long>
     public string ImageName { get; private set; }
     public bool IsActive { get; private set; }
     public List<AccountRole> AccountRoles { get; private set; }
+    public List<Wallet> Wallets { get; private set; }
 
     //Constructor
     public Account(string fullName, string email, string username, string password, string imageName, bool isActive)
@@ -24,6 +26,7 @@ public class Account : BaseEntity<long>
         ImageName = string.IsNullOrEmpty(imageName) ? "no-profile.jpg" : imageName;
         IsActive = isActive;
         AccountRoles = new List<AccountRole>();
+        Wallets = new List<Wallet>();
     }
 
     //Methods

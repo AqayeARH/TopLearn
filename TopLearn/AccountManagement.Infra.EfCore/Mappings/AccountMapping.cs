@@ -22,5 +22,9 @@ public class AccountMapping : IEntityTypeConfiguration<Account>
         builder.HasMany(x => x.AccountRoles)
             .WithOne(x => x.Account)
             .HasForeignKey(x => x.AccountId);
+
+        builder.HasMany(x => x.Wallets)
+            .WithOne(x => x.Account)
+            .HasForeignKey(x => x.AccountId);
     }
 }

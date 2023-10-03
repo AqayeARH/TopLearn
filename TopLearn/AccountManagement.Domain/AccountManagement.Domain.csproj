@@ -10,4 +10,8 @@
     <ProjectReference Include="..\AccountManagement.Application.Contracts\AccountManagement.Application.Contracts.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="WalletAgg\" />
+  </ItemGroup>
+
 </Project>

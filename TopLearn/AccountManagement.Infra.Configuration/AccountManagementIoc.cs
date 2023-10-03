@@ -1,10 +1,12 @@
 ﻿using AccountManagement.Application;
 using AccountManagement.Application.Contracts.Account;
 using AccountManagement.Application.Contracts.Role;
+using AccountManagement.Application.Contracts.Wallet;
 using AccountManagement.Common.Authentication;
 using AccountManagement.Common.PasswordHasher;
 using AccountManagement.Domain.AccountAgg;
 using AccountManagement.Domain.RoleAgg;
+using AccountManagement.Domain.WalletAgg;
 using AccountManagement.Infra.EfCore;
 using AccountManagement.Infra.EfCore.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +29,13 @@ public static class AccountManagementIoc
 
         services.AddTransient<IRoleRepository, RoleRepository>();
         services.AddTransient<IRoleApplication, RoleApplication>();
+
+        #endregion
+
+        #region Wallet
+
+        services.AddTransient<IWalletRepository, WalletRepository>();
+        services.AddTransient<IWalletApplication, WalletApplication>();
 
         #endregion
 

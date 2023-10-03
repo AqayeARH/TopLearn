@@ -1,6 +1,7 @@
 ﻿using AccountManagement.Domain;
 using AccountManagement.Domain.AccountAgg;
 using AccountManagement.Domain.RoleAgg;
+using AccountManagement.Domain.WalletAgg;
 using AccountManagement.Infra.EfCore.Mappings;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,8 @@ public class AccountManagementContext : DbContext
     public DbSet<Account> Accounts { get; set; }
     public DbSet<Role> Roles { get; set; }
     public DbSet<AccountRole> AccountRoles { get; set; }
+    public DbSet<WalletType> WalletTypes { get; set; }
+    public DbSet<Wallet> Wallets { get; set; }
 
     #endregion
 
