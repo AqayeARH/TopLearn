@@ -233,4 +233,14 @@ public class AccountApplication : IAccountApplication
 
         return OperationResult.Success("برای اعمال تغییرات دوباره وارد سایت شوید");
     }
+
+    public async Task<AccountViewModel> InformationAccount(string email)
+    {
+        return await _accountRepository.InformationAccount(email);
+    }
+
+    public async Task<AccountViewModel> UserPanelSidebar(string email)
+    {
+        return await _accountRepository.UserPanelSidebar(email);
+    }
 }

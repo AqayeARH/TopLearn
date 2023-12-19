@@ -14,4 +14,6 @@ public interface IAccountApplication
     Task<OperationResult> EditProfile(EditProfileCommand command);
     Task<EditProfileCommand> GetAccountForEditProfile(long id);
     Task<OperationResult> ChangePassword(ChangePasswordCommand command);
+    Task<AccountViewModel> InformationAccount(string email);
+    Task<AccountViewModel> UserPanelSidebar(string email);
 }

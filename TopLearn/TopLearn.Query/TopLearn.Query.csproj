@@ -6,11 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Contracts\UserPanel\" />
+    <ProjectReference Include="..\AccountManagement.Common\AccountManagement.Common.csproj" />
+    <ProjectReference Include="..\AccountManagement.Infra.EfCore\AccountManagement.Infra.EfCore.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AccountManagement.Infra.EfCore\AccountManagement.Infra.EfCore.csproj" />
+    <Folder Include="Contracts\" />
+    <Folder Include="Queries\" />
   </ItemGroup>
 
 </Project>

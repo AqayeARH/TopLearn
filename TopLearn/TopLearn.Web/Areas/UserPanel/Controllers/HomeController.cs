@@ -3,7 +3,6 @@ using AccountManagement.Application.Contracts.Account;
 using AccountManagement.Common.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using TopLearn.Query.Contracts.UserPanel;
 using TopLearn.Web.Controllers;
 
 namespace TopLearn.Web.Areas.UserPanel.Controllers
@@ -14,13 +13,10 @@ namespace TopLearn.Web.Areas.UserPanel.Controllers
     {
         #region constructor injection
 
-        private readonly IAccountQuery _accountQuery;
         private readonly IAuthenticationHelper _authenticationHelper;
         private readonly IAccountApplication _accountApplication;
-        public HomeController(IAccountQuery accountQuery, IAuthenticationHelper authenticationHelper,
-            IAccountApplication accountApplication)
+        public HomeController(IAuthenticationHelper authenticationHelper, IAccountApplication accountApplication)
         {
-            _accountQuery = accountQuery;
             _authenticationHelper = authenticationHelper;
             _accountApplication = accountApplication;
         }
@@ -31,7 +27,7 @@ namespace TopLearn.Web.Areas.UserPanel.Controllers
         public async Task<IActionResult> Index()
         {
             var email = _authenticationHelper.CurrentAccountEmail();
-            var account = await _accountQuery.InformationAccount(email);
+            var account = await _accountApplication.InformationAccount(email);
             return View(account);
         }
 

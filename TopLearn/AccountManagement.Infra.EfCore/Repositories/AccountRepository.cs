@@ -1,6 +1,8 @@
-﻿using _0.Framework.Infrastructure;
+﻿using _0.Framework.Application;
+using _0.Framework.Infrastructure;
 using AccountManagement.Application.Contracts.Account;
 using AccountManagement.Domain.AccountAgg;
+using AccountManagement.Domain.WalletAgg;
 using Microsoft.EntityFrameworkCore;
 
 namespace AccountManagement.Infra.EfCore.Repositories;
@@ -38,5 +40,52 @@ public class AccountRepository : EfCoreGenericRepository<long, Account>, IAccoun
             Username = x.Username,
             ImageName = x.ImageName
         }).SingleOrDefaultAsync(x => x.Id == id);
+    }
+
+    public async Task<AccountViewModel> InformationAccount(string email)
+    {
+        var account = await _context.Accounts
+            .Select(x => new AccountViewModel()
+            {
+                Email = x.Email,
+                FullName = x.FullName,
+                RegisterDate = x.CreationDate.ToFarsi(),
+                Username = x.Username,
+                Id = x.Id,
+            })
+            .SingleOrDefaultAsync(x => x.Email.Equals(email));
+
+        var wallets = await _context.Wallets
+            .Where(x => x.AccountId == account.Id)
+            .Select(x => new { x.Amount, x.IsPay, x.TypeId })
+            .ToListAsync();
+
+        var balancedAmount = wallets
+            .Where(x => x.IsPay && x.TypeId == WalletTypeId.In)
+            .Sum(x => x.Amount) - wallets
+            .Where(x => x.IsPay && x.TypeId == WalletTypeId.Out)
+            .Sum(x => x.Amount);
+
+        if (account != null)
+        {
+            account.Wallet = balancedAmount >= 0 ? balancedAmount : 0;
+        }
+
+        return account;
+    }
+
+    public async Task<AccountViewModel> UserPanelSidebar(string email)
+    {
+        var account = await _context.Accounts
+            .Select(x => new AccountViewModel()
+            {
+                Email = x.Email,
+                FullName = x.FullName,
+                ImageName = x.ImageName,
+                RegisterDate = x.CreationDate.ToFarsi(),
+            })
+            .SingleOrDefaultAsync(x => x.Email.Equals(email));
+
+        return account;
     }
 }

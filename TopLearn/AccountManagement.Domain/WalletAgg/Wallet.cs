@@ -13,12 +13,12 @@ public class Wallet : BaseEntity<long>
     public Account Account { get; private set; }
     public WalletType WalletType { get; private set; }
 
-    public Wallet(int typeId, long accountId, double amount, string description)
+    public Wallet(int typeId, long accountId, double amount, string description, bool isPay)
     {
         TypeId = typeId;
         AccountId = accountId;
         Amount = amount;
         Description = description;
-        IsPay = false;
+        IsPay = isPay;
     }
 }

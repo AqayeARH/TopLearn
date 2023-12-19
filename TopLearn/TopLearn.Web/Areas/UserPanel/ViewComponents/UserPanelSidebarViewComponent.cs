@@ -1,6 +1,6 @@
-﻿using AccountManagement.Common.Authentication;
+﻿using AccountManagement.Application.Contracts.Account;
+using AccountManagement.Common.Authentication;
 using Microsoft.AspNetCore.Mvc;
-using TopLearn.Query.Contracts.UserPanel;
 
 namespace TopLearn.Web.Areas.UserPanel.ViewComponents;
 
@@ -8,11 +8,11 @@ public class UserPanelSidebarViewComponent : ViewComponent
 {
     #region constructor injection
 
-    private readonly IAccountQuery _accountQuery;
+    private readonly IAccountApplication _accountApplication;
     private readonly IAuthenticationHelper _authenticationHelper;
-    public UserPanelSidebarViewComponent(IAccountQuery accountQuery, IAuthenticationHelper authenticationHelper)
+    public UserPanelSidebarViewComponent(IAccountApplication accountApplication, IAuthenticationHelper authenticationHelper)
     {
-        _accountQuery = accountQuery;
+        _accountApplication = accountApplication;
         _authenticationHelper = authenticationHelper;
     }
 
@@ -20,7 +20,7 @@ public class UserPanelSidebarViewComponent : ViewComponent
     public async Task<IViewComponentResult> InvokeAsync()
     {
         var email = _authenticationHelper.CurrentAccountEmail();
-        var account = await _accountQuery.UserPanelSidebar(email);
+        var account = await _accountApplication.UserPanelSidebar(email);
         return View("~/Areas/UserPanel/Views/Shared/Components/UserPanelSidebar.cshtml", account);
     }
 }
