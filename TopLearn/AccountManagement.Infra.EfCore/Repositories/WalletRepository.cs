@@ -34,4 +34,21 @@ public class WalletRepository:EfCoreGenericRepository<long,Wallet>,IWalletReposi
 
         return wallets;
     }
+
+    public async Task<WalletViewModel> GetWalletBy(long id)
+    {
+        var wallet = await _context.Wallets
+            .Where(x => x.Id == id)
+            .Select(x => new WalletViewModel()
+            {
+                Amount = x.Amount,
+                CreationDate = x.CreationDate.ToFarsi(),
+                Description = x.Description,
+                IsPayed = x.IsPay,
+                TypeId = x.TypeId,
+                WalletId = x.Id,
+            }).FirstOrDefaultAsync();
+
+        return wallet;
+    }
 }

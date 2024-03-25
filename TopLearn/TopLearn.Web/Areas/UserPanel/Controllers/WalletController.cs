@@ -41,21 +41,38 @@ namespace TopLearn.Web.Areas.UserPanel.Controllers
             command.IsPayed = false;
 
             var result = await _walletApplication.ChargeWallet(command);
-            switch (result.Status)
+            switch (result.Item1.Status)
             {
                 case OperationResultStatus.Error:
-                    ErrorAlert(result.Message);
+                    ErrorAlert(result.Item1.Message);
                     return View(command);
                 case OperationResultStatus.Success:
                     break;
                 case OperationResultStatus.NotFound:
-                    ErrorAlert(result.Message);
+                    ErrorAlert(result.Item1.Message);
                     return View(command);
                 default:
                     return NotFound();
             }
 
-            return null;
+            #region Online Payment
+
+            var amount = Convert.ToInt32(command.Amount);
+            var email = _authenticationHelper.CurrentAccountEmail();
+            var payment = new ZarinpalSandbox.Payment(amount);
+            var callBackUrl = $"https://localhost:7135/CallBack?walletId={result.Item2}";
+
+            var response = await payment.PaymentRequest("شارژ کیف پول",
+                callBackUrl, email, "");
+
+            if (response.Status == 100)
+            {
+               return Redirect("https://sandbox.zarinpal.com/pg/StartPay/" + response.Authority);
+            }
+
+            #endregion
+
+            return BadRequest();
         }
     }
 }

@@ -21,4 +21,9 @@ public class Wallet : BaseEntity<long>
         Description = description;
         IsPay = isPay;
     }
+
+    public void PaymentSuccess()
+    {
+        IsPay = true;
+    }
 }

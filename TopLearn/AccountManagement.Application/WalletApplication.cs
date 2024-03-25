@@ -15,11 +15,11 @@ public class WalletApplication : IWalletApplication
     }
 
     #endregion
-    public async Task<OperationResult> ChargeWallet(ChargeWalletCommand command)
+    public async Task<Tuple<OperationResult, long>> ChargeWallet(ChargeWalletCommand command)
     {
         if (command.Amount == 0)
         {
-            return OperationResult.Error("مبلغ وارد شده معتبر نمیباشد");
+            return Tuple.Create(OperationResult.Error("مبلغ وارد شده معتبر نمیباشد"), Convert.ToInt64(0));
         }
 
         var wallet = new Wallet(WalletTypeId.In, command.AccountId, command.Amount,
@@ -28,10 +28,30 @@ public class WalletApplication : IWalletApplication
         await _walletRepository.Create(wallet);
         await _walletRepository.Save();
 
-        return OperationResult.Success();
+        return Tuple.Create(OperationResult.Success(), wallet.Id);
     }
     public async Task<List<WalletViewModel>> WalletReports(long accountId)
     {
         return await _walletRepository.WalletReports(accountId);
+    }
+
+    public async Task<WalletViewModel> GetWalletBy(long id)
+    {
+       return await _walletRepository.GetWalletBy(id);
+    }
+
+    public async Task<OperationResult> SuccessPayment(long id)
+    {
+        var wallet = await _walletRepository.Get(id);
+
+        if (wallet == null)
+        {
+            return OperationResult.NotFound();
+        }
+
+        wallet.PaymentSuccess();
+        await _walletRepository.Save();
+
+        return OperationResult.Success();
     }
 }

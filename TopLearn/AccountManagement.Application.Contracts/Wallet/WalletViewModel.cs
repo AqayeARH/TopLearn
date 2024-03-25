@@ -2,6 +2,7 @@
 {
     public class WalletViewModel
     {
+        public long WalletId { get; set; }
         public int TypeId { get; set; }
         public string Type { get; set; }
         public bool IsPayed { get; set; }
