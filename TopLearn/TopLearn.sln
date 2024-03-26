@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34018.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TopLearn.Web", "TopLearn.Web\TopLearn.Web.csproj", "{829DAF27-03C1-4571-AE0B-43761A9E67C6}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AccountManagement", "AccountManagement", "{16EE37FB-B59B-4F1E-8878-2E48B7187454}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AccountManagement.Domain", "AccountManagement.Domain", "{3C3B3908-2CDD-4E9D-B7B9-8A0D0ED261D4}"
@@ -29,7 +27,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountManagement.Common", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "0.Framework", "0.Framework\0.Framework.csproj", "{9A601C67-FA34-4C3E-80A3-A4C788BA8DFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TopLearn.Query", "TopLearn.Query\TopLearn.Query.csproj", "{E1985631-BD2B-4506-998B-ADE8B12FADF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TopLearn.Query", "TopLearn.Query\TopLearn.Query.csproj", "{E1985631-BD2B-4506-998B-ADE8B12FADF5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TopLearn.Web", "TopLearn.Web\TopLearn.Web.csproj", "{A4ED31E7-80D9-464F-9827-103DF3BBCE21}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,10 +37,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{829DAF27-03C1-4571-AE0B-43761A9E67C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{829DAF27-03C1-4571-AE0B-43761A9E67C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{829DAF27-03C1-4571-AE0B-43761A9E67C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{829DAF27-03C1-4571-AE0B-43761A9E67C6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{39372BC1-9F51-43AB-BE78-2E483D21F95A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{39372BC1-9F51-43AB-BE78-2E483D21F95A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39372BC1-9F51-43AB-BE78-2E483D21F95A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -73,6 +69,10 @@ Global
 		{E1985631-BD2B-4506-998B-ADE8B12FADF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1985631-BD2B-4506-998B-ADE8B12FADF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1985631-BD2B-4506-998B-ADE8B12FADF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4ED31E7-80D9-464F-9827-103DF3BBCE21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4ED31E7-80D9-464F-9827-103DF3BBCE21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4ED31E7-80D9-464F-9827-103DF3BBCE21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4ED31E7-80D9-464F-9827-103DF3BBCE21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
