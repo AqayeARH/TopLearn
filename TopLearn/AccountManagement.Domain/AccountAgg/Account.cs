@@ -1,4 +1,5 @@
 ﻿using _0.Framework.Domain;
+using AccountManagement.Domain.PermissionAgg;
 using AccountManagement.Domain.WalletAgg;
 
 namespace AccountManagement.Domain.AccountAgg;

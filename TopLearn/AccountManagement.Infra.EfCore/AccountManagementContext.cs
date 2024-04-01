@@ -1,5 +1,5 @@
-﻿using AccountManagement.Domain;
-using AccountManagement.Domain.AccountAgg;
+﻿using AccountManagement.Domain.AccountAgg;
+using AccountManagement.Domain.PermissionAgg;
 using AccountManagement.Domain.RoleAgg;
 using AccountManagement.Domain.WalletAgg;
 using AccountManagement.Infra.EfCore.Mappings;

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AccountManagement.Infra.EfCore")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c9c93ea0a9c2bff7a8d044276ad076c6776ab24f")]
 [assembly: System.Reflection.AssemblyProductAttribute("AccountManagement.Infra.EfCore")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AccountManagement.Infra.EfCore")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

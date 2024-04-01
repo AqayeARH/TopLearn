@@ -6,11 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Role\" />
+    <ProjectReference Include="..\0.Framework\0.Framework.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\0.Framework\0.Framework.csproj" />
+    <Folder Include="Permission\" />
   </ItemGroup>
 
 </Project>

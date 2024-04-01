@@ -88,4 +88,40 @@ public class AccountRepository : EfCoreGenericRepository<long, Account>, IAccoun
 
         return account;
     }
+
+    public List<AccountViewModel> GetFilteredList(AccountSearchModel searchModel)
+    {
+        var accounts =  _context.Accounts
+            .Select(x => new AccountViewModel()
+            {
+                Email = x.Email,
+                FullName = x.FullName,
+                Id = x.Id,
+                ImageName = x.ImageName,
+                RegisterDate = x.CreationDate.ToFarsi(),
+                Username = x.Username,
+                IsActive = x.IsActive
+            }).AsQueryable();
+
+        #region Filtering
+
+        if (!string.IsNullOrEmpty(searchModel.Email))
+        {
+            accounts = accounts.Where(x => x.Email.Contains(searchModel.Email));
+        }
+
+        if (!string.IsNullOrEmpty(searchModel.FullName))
+        {
+            accounts = accounts.Where(x => x.FullName.Contains(searchModel.FullName));
+        }
+
+        if (searchModel.NotActivatedAccount)
+        {
+            accounts = accounts.Where(x => x.IsActive == false);
+        }
+
+        #endregion
+
+        return accounts.ToList();
+    }
 }

@@ -4,6 +4,7 @@ using AccountManagement.Common.Authentication;
 using AccountManagement.Common.Convertors;
 using AccountManagement.Common.PasswordHasher;
 using AccountManagement.Domain.AccountAgg;
+using AccountManagement.Domain.PermissionAgg;
 
 namespace AccountManagement.Application;
 
@@ -12,15 +13,17 @@ public class AccountApplication : IAccountApplication
     #region constructor injection
 
     private readonly IAccountRepository _accountRepository;
+    private readonly IPermissionRepository _permissionRepository;
     private readonly IPasswordHasher _passwordHasher;
     private readonly IAuthenticationHelper _authenticationHelper;
     private readonly IFileUploader _fileUploader;
-    public AccountApplication(IAccountRepository accountRepository, IPasswordHasher passwordHasher, IAuthenticationHelper authenticationHelper, IFileUploader fileUploader)
+    public AccountApplication(IAccountRepository accountRepository, IPasswordHasher passwordHasher, IAuthenticationHelper authenticationHelper, IFileUploader fileUploader, IPermissionRepository permissionRepository)
     {
         _accountRepository = accountRepository;
         _passwordHasher = passwordHasher;
         _authenticationHelper = authenticationHelper;
         _fileUploader = fileUploader;
+        _permissionRepository = permissionRepository;
     }
 
     #endregion
@@ -106,6 +109,46 @@ public class AccountApplication : IAccountApplication
         await _accountRepository.Save();
 
         return OperationResult.Success("حساب با موفقیت فعال شد");
+    }
+
+    public async Task<OperationResult> ActiveAccount(long id)
+    {
+        var account = await _accountRepository.Get(id);
+
+        if (account == null)
+        {
+            return OperationResult.NotFound("کاربری با مشخصات ارسالی یافت نشد");
+        }
+
+        if (account.IsActive)
+        {
+            return OperationResult.Error("حساب از قبل فعال بوده است");
+        }
+
+        account.ActivateAccount();
+        await _accountRepository.Save();
+
+        return OperationResult.Success("حساب با موفقیت فعال شد");
+    }
+
+    public async Task<OperationResult> DeActiveAccount(long id)
+    {
+        var account = await _accountRepository.Get(id);
+
+        if (account == null)
+        {
+            return OperationResult.NotFound("کاربری با مشخصات ارسالی یافت نشد");
+        }
+
+        if (!account.IsActive)
+        {
+            return OperationResult.Error("حساب از قبل غیر فعال بوده است");
+        }
+
+        account.DeActivateAccount();
+        await _accountRepository.Save();
+
+        return OperationResult.Success("حساب با موفقیت غیر فعال شد");
     }
 
     public Task<OperationResult> LogoutAccount()
@@ -242,5 +285,44 @@ public class AccountApplication : IAccountApplication
     public async Task<AccountViewModel> UserPanelSidebar(string email)
     {
         return await _accountRepository.UserPanelSidebar(email);
+    }
+
+    public List<AccountViewModel> GetList(AccountSearchModel searchModel)
+    {
+        return _accountRepository.GetFilteredList(searchModel);
+    }
+
+    public async Task<OperationResult> Create(CreateAccountCommand command, List<int> rolesId)
+    {
+        var email = command.Email.FixEmail();
+
+        if (await _accountRepository.IsExist(x => x.Email.Equals(email)))
+        {
+            return OperationResult.Error("ایمیل وارد شده قبلا در سایت ثبت شده است");
+        }
+        
+        if (await _accountRepository.IsExist(x => x.Username.Equals(command.Username)))
+        {
+            return OperationResult.Error("نام کاربری وارد شده قبلا در سایت ثبت شده است");
+        }
+
+        var password = _passwordHasher.Hash(command.Password);
+
+        var imageName = _fileUploader.Upload(command.Profile, "UserImages");
+
+        var account = new Account(command.FullName, command.Email, command.Username, password, imageName,
+            command.IsActive);
+
+        await _accountRepository.Create(account);
+        await _accountRepository.Save();
+
+        foreach (var roleId in rolesId)
+        {
+            var permission = new AccountRole(account.Id, roleId);
+            await _permissionRepository.AddPermission(permission);
+            await _permissionRepository.Save();
+        }
+
+        return OperationResult.Success("حساب با موفقیت افزوده شد");
     }
 }

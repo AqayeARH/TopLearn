@@ -18,6 +18,14 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\Project\Core\new_TopLearn\TopLearn\TopLearn.Web
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/Project/Core/new_TopLearn/TopLearn/TopLearn.Web/Areas/Administrator/Pages/AccountManagement/Accounts/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRvclxQYWdlc1xBY2NvdW50TWFuYWdlbWVudFxBY2NvdW50c1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/Core/new_TopLearn/TopLearn/TopLearn.Web/Areas/Administrator/Pages/AccountManagement/Accounts/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRvclxQYWdlc1xBY2NvdW50TWFuYWdlbWVudFxBY2NvdW50c1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Project/Core/new_TopLearn/TopLearn/TopLearn.Web/Areas/Administrator/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRvclxQYWdlc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

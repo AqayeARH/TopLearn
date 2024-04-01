@@ -78,6 +78,13 @@
         </div>
         <!-- End Right content here -->
 
+        <div id="MainModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content" id="ModalContent">
+                </div>
+            </div>
+        </div>
+
     </div>
     <!-- END wrapper -->
     <script src="~/admin/assets/js/jquery.min.js"></script>
@@ -110,7 +117,9 @@
     <script src="~/admin/assets/js/jquery.dashboard.js"></script>
     <script src="~/admin/assets/js/jquery.chat.js"></script>
     <script src="~/admin/assets/js/jquery.todo.js"></script>
+    <script src="~/admin/assets/js/site.js"></script>
 
     <partial name="_ValidationScriptsPartial" />
+    @await RenderSectionAsync("Scripts", false)
 </body>
 </html>

@@ -1,7 +1,7 @@
 ﻿using AccountManagement.Domain.AccountAgg;
 using AccountManagement.Domain.RoleAgg;
 
-namespace AccountManagement.Domain;
+namespace AccountManagement.Domain.PermissionAgg;
 
 public class AccountRole
 {

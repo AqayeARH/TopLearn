@@ -2,5 +2,5 @@
 
 public interface IRoleApplication
 {
-    
+    Task<List<RoleViewModel>> GetList();
 }

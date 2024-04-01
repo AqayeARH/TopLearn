@@ -14,6 +14,11 @@ var services = builder.Services;
 services.AddControllersWithViews();
 services.AddRazorPages();
 services.AddHttpContextAccessor();
+services.Configure<CookiePolicyOptions>(options =>
+{
+    options.CheckConsentNeeded = context => true;
+    options.MinimumSameSitePolicy = SameSiteMode.Lax;
+});
 services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
     {

@@ -10,4 +10,5 @@ public interface IAccountRepository : IGenericRepository<long, Account>
     Task<EditProfileCommand> GetAccountForEditProfile(long id);
     Task<AccountViewModel> InformationAccount(string email);
     Task<AccountViewModel> UserPanelSidebar(string email);
+    List<AccountViewModel> GetFilteredList(AccountSearchModel searchModel);
 }

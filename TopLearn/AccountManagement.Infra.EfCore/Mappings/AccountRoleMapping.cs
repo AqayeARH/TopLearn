@@ -1,4 +1,4 @@
-﻿using AccountManagement.Domain;
+﻿using AccountManagement.Domain.PermissionAgg;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

@@ -1,4 +1,6 @@
-﻿namespace AccountManagement.Domain.RoleAgg;
+﻿using AccountManagement.Domain.PermissionAgg;
+
+namespace AccountManagement.Domain.RoleAgg;
 
 public class Role
 {
