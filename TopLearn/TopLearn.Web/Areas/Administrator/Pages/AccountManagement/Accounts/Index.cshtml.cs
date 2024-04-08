@@ -1,4 +1,3 @@
-using _0.Framework.Application;
 using AccountManagement.Application.Contracts.Account;
 using AccountManagement.Application.Contracts.Role;
 using Microsoft.AspNetCore.Mvc;
@@ -59,5 +58,19 @@ namespace TopLearn.Web.Areas.Administrator.Pages.AccountManagement.Accounts
             return RedirectToPage("Index");
         }
 
+        public async Task<IActionResult> OnGetEdit(long id)
+        {
+            var model = await _accountApplication.GetDetails(id);
+            model.Roles = await _roleApplication.GetList();
+            return Partial("Edit", model);
+        }
+
+        public async Task<IActionResult> OnPostEdit(EditAccountCommand command, List<int> selectedRoles)
+        {
+            var result = await _accountApplication.Edit(command, selectedRoles);
+
+
+            return new JsonResult(result);
+        }
     }
 }

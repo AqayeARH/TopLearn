@@ -213,7 +213,7 @@ public class AccountApplication : IAccountApplication
     {
         var account = await _accountRepository.Get(command.Id);
 
-        var email = command.Email;
+        var email = command.Email.FixEmail();
 
         if (account == null)
         {
@@ -228,7 +228,7 @@ public class AccountApplication : IAccountApplication
 
         var imageName = _fileUploader.Upload(command.Image, "UserImages");
 
-        account.EditProfile(command.FullName, command.Email, command.Username, imageName);
+        account.EditProfile(command.FullName, email, command.Username, imageName);
 
         await _accountRepository.Save();
 
@@ -300,7 +300,7 @@ public class AccountApplication : IAccountApplication
         {
             return OperationResult.Error("ایمیل وارد شده قبلا در سایت ثبت شده است");
         }
-        
+
         if (await _accountRepository.IsExist(x => x.Username.Equals(command.Username)))
         {
             return OperationResult.Error("نام کاربری وارد شده قبلا در سایت ثبت شده است");
@@ -324,5 +324,57 @@ public class AccountApplication : IAccountApplication
         }
 
         return OperationResult.Success("حساب با موفقیت افزوده شد");
+    }
+
+    public async Task<EditAccountCommand> GetDetails(long id)
+    {
+        return await _accountRepository.GetDetailsBy(id);
+    }
+
+    public async Task<OperationResult> Edit(EditAccountCommand command, List<int> rolesId)
+    {
+        var account = await _accountRepository.Get(command.Id);
+
+        if (account == null)
+        {
+            return OperationResult.NotFound("کاربری یافت نشد");
+        }
+
+        var email = command.Email.FixEmail();
+
+        if (await _accountRepository.IsExist(x => x.Email == email && x.Id != command.Id))
+        {
+            return OperationResult.Error("ایمیل وارد شده قبلا در سایت ثبت شده است");
+        }
+
+        if (await _accountRepository.IsExist(x => x.Username == command.Username && x.Id != command.Id))
+        {
+            return OperationResult.Error("نام کاربری وارد شده قبلا در سایت ثبت شده است");
+        }
+
+        var imageName = _fileUploader.Upload(command.Profile, "UserImages");
+
+        account.Edit(command.FullName, email, command.Username, imageName, command.IsActive);
+        await _accountRepository.Save();
+
+        await _permissionRepository.RemovePermission(account.Id);
+
+        foreach (var roleId in rolesId)
+        {
+            var permission = new AccountRole(account.Id, roleId);
+            await _permissionRepository.AddPermission(permission);
+        }
+
+        await _permissionRepository.Save();
+
+        if (command.Profile != null)
+        {
+            if (!command.ImageName.Equals("no-profile.jpg"))
+            {
+                _fileUploader.Delete("UserImages", command.ImageName);
+            }
+        }
+
+        return OperationResult.Success("حساب کاربری با موفقیت ویرایش شد");
     }
 }

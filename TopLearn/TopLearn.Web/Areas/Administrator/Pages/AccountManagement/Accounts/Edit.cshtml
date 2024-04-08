@@ -1,0 +1,82 @@
+﻿@model AccountManagement.Application.Contracts.Account.EditAccountCommand
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = null;
+}
+
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h4 class="modal-title">ویرایش حساب</h4>
+</div>
+
+<form asp-page="Index" asp-page-handler="Edit"
+      method="post"
+      data-ajax="true"
+      data-callback=""
+      data-action="Refresh"
+      enctype="multipart/form-data">
+    <div class="modal-body">
+        <input type="hidden" asp-for="Id" value="@Model.Id" />
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="FullName" class="control-label">نام</label>
+                    <input class="form-control" asp-for="FullName" />
+                    <span asp-validation-for="FullName" class="error"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Username" class="control-label">نام کاربری</label>
+                    <input class="form-control" asp-for="Username">
+                    <span asp-validation-for="Username" class="error"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label asp-for="Profile" class="control-label">عکس</label>
+                    <input type="file" class="form-control" asp-for="Profile" accept="image/*">
+                    <span asp-validation-for="Profile" class="error"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label">ایمیل</label>
+                    <input class="form-control" asp-for="Email">
+                    <span asp-validation-for="Email" class="error"></span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label asp-for="IsActive" class="control-label">فعال بودن حساب</label>
+                    <input class="form-control" asp-for="IsActive">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    @foreach (var item in Model.Roles)
+                    {
+                        <div>
+                            <input type="checkbox" name="selectedRoles" id="selectedRoles" value="@item.Id"
+                            @(Model.AccountRoles.Contains(item.Id) ? "checked" : "")>
+                            <label>
+                                @item.RoleTitle
+                            </label>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">بستن</button>
+        <button type="submit" class="btn btn-success waves-effect waves-light">ذخیره تغییرات</button>
+    </div>
+</form>

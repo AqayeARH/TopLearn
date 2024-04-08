@@ -63,4 +63,16 @@ public class Account : BaseEntity<long>
     {
         Password = password;
     }
+
+    public void Edit(string fullName, string email, string username, string imageName, bool isActive)
+    {
+        FullName = fullName;
+        Email = email;
+        Username = username;
+        if (!string.IsNullOrEmpty(imageName))
+        {
+            ImageName = imageName;
+        }
+        IsActive = isActive;
+    }
 }

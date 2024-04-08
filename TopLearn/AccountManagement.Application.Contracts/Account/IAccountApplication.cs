@@ -20,4 +20,6 @@ public interface IAccountApplication
     Task<AccountViewModel> UserPanelSidebar(string email);
     List<AccountViewModel> GetList(AccountSearchModel searchModel);
     Task<OperationResult> Create(CreateAccountCommand command,List<int> rolesId);
+    Task<EditAccountCommand> GetDetails(long id);
+    Task<OperationResult> Edit(EditAccountCommand command, List<int> rolesId);
 }

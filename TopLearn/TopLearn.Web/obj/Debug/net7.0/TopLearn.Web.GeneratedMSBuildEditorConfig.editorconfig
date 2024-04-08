@@ -22,8 +22,16 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRvclxQYWdlc1xBY2NvdW50TWFuYWdlbWVudFxBY2NvdW50c1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Project/Core/new_TopLearn/TopLearn/TopLearn.Web/Areas/Administrator/Pages/AccountManagement/Accounts/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRvclxQYWdlc1xBY2NvdW50TWFuYWdlbWVudFxBY2NvdW50c1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Project/Core/new_TopLearn/TopLearn/TopLearn.Web/Areas/Administrator/Pages/AccountManagement/Accounts/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRvclxQYWdlc1xBY2NvdW50TWFuYWdlbWVudFxBY2NvdW50c1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/Core/new_TopLearn/TopLearn/TopLearn.Web/Areas/Administrator/Pages/AccountManagement/Roles/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRvclxQYWdlc1xBY2NvdW50TWFuYWdlbWVudFxSb2xlc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Project/Core/new_TopLearn/TopLearn/TopLearn.Web/Areas/Administrator/Pages/Index.cshtml]

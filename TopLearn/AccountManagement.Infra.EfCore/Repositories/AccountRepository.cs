@@ -91,7 +91,7 @@ public class AccountRepository : EfCoreGenericRepository<long, Account>, IAccoun
 
     public List<AccountViewModel> GetFilteredList(AccountSearchModel searchModel)
     {
-        var accounts =  _context.Accounts
+        var accounts = _context.Accounts
             .Select(x => new AccountViewModel()
             {
                 Email = x.Email,
@@ -123,5 +123,25 @@ public class AccountRepository : EfCoreGenericRepository<long, Account>, IAccoun
         #endregion
 
         return accounts.ToList();
+    }
+
+    public async Task<EditAccountCommand> GetDetailsBy(long id)
+    {
+        //var accountRoles = await _context.AccountRoles.Where(x => x.AccountId == id)
+        //    .Select(x => x.RoleId)
+        //    .ToListAsync();
+
+        return await _context.Accounts.Select(x => new EditAccountCommand()
+        {
+            Email = x.Email,
+            FullName = x.FullName,
+            Id = x.Id,
+            IsActive = x.IsActive,
+            Username = x.Username,
+            ImageName = x.ImageName,
+            AccountRoles = x.AccountRoles.Where(y => y.AccountId == id)
+                .Select(y => y.RoleId)
+                .ToList()
+        }).SingleOrDefaultAsync(x => x.Id == id);
     }
 }
