@@ -354,7 +354,7 @@ public class AccountApplication : IAccountApplication
 
         var imageName = _fileUploader.Upload(command.Profile, "UserImages");
 
-        account.Edit(command.FullName, email, command.Username, imageName, command.IsActive);
+        account.Edit(command.FullName, email, command.Username, imageName);
         await _accountRepository.Save();
 
         await _permissionRepository.RemovePermission(account.Id);

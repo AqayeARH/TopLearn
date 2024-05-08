@@ -64,7 +64,7 @@ public class Account : BaseEntity<long>
         Password = password;
     }
 
-    public void Edit(string fullName, string email, string username, string imageName, bool isActive)
+    public void Edit(string fullName, string email, string username, string imageName)
     {
         FullName = fullName;
         Email = email;
@@ -73,6 +73,5 @@ public class Account : BaseEntity<long>
         {
             ImageName = imageName;
         }
-        IsActive = isActive;
     }
 }
